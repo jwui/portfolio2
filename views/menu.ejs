@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>메뉴소개 페이지</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <div id="menucont">
+      <div class="center">
+        <div class="title">MENU</div>
+        <a href="/">뒤로가기</a>
+        <ul class="select">
+          <li><a href="/menu/coffee">커피</a></li>
+          <li><a href="/menu/cookie">쿠키</a></li>
+          <li><a href="/menu/cake">케이크</a></li>
+          <li><a href="/menu/bread">브레드</a></li>
+          <li><a href="/menu">전체</a></li>
+        </ul>
+        <div class="listwrap">
+          <% for(let i=0; i< prdData.length; i++) { %>
+          <div class="list">
+            <img src="/upload/<%- prdData[i].thumbnail %>" />
+            <p><%- prdData[i].name %></p>
+          </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
