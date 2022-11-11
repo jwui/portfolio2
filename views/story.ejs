@@ -5,50 +5,71 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>브랜드 스토리</title>
+    <link href="/css/styles.css" rel="stylesheet" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   </head>
   <body>
+    <%- include("common/header.ejs") %>
     <div id="storycont">
       <div class="cont1">
-        <div class="left"></div>
+        <div class="left" h1 data-aos="fade-in" data-aos-duration="1000"></div>
         <div class="right">
-          <h1>BRAND STORY</h1>
-          <h2>
+          <h1 data-aos="zoom-in-left" data-aos-duration="1000">BRAND STORY</h1>
+          <h2 data-aos="zoom-in-left" data-aos-duration="1000">
             DUNKIN DONUTS<br />
             MY DONUT, MY TABLE
           </h2>
-          <p>
+          <p data-aos="zoom-in-left" data-aos-duration="1000">
             신선한 도넛과 매일 구워내는 쿠키, <br />
             오늘의 나, 오늘의 우리 보여주는 곳.
           </p>
-          <p>
+          <p data-aos="zoom-in-left" data-aos-duration="1000">
             원두에서 공간까지,<br />
             나만의 취향을 발견할 수 있도록,<br />
             당신의 일상속에 영감을 제시합니다.
           </p>
-
-          <p>여기 우리의 테이블 위에</p>
+          <p data-aos="fade-in" data-aos-duration="1000">
+            여기 우리의 테이블 위에
+          </p>
         </div>
       </div>
       <div class="cont2">
-        <div class="left"></div>
+        <div class="left" h1 data-aos="fade-in" data-aos-duration="1000"></div>
         <div class="right">
-          <h1>BRAND SLOGAN</h1>
-          <h2>SELECT YOUR MODE & MOOD</h2>
-          <p>
+          <h1 data-aos="zoom-in-left" data-aos-duration="1000">BRAND SLOGAN</h1>
+          <h2 data-aos="zoom-in-left" data-aos-duration="1000">
+            SELECT YOUR MODE & MOOD
+          </h2>
+          <p data-aos="zoom-in-left" data-aos-duration="1000">
             당신의 시간은 어떤가요? <br />
             오롯이 나를 위한 시간, 내가 사랑하는 사람들과 함께 할 수 있는 시간을
             얼마나 가지고 있나요?
           </p>
-          <p>
+          <p data-aos="zoom-in-left" data-aos-duration="1000">
             우리의 인생은 다시 돌려볼 수 있는 영화가 아니기에, 각자의 mode와
             mood로 오롯이 나를 위한 시간을 마주해야 합니다.
           </p>
-          <p>
+          <p data-aos="fade-in" data-aos-duration="1000">
             오늘 당신이 선택한 도넛은 어떤 맛인가요? 그리고 오늘 당신의 기분,
             컨디션은 어떤가요? 내가 셀렉하는 오늘의 즐거움, 던킨도너츠입니다.
           </p>
         </div>
       </div>
+      <div class="cont3">
+        <iframe
+          width="70%"
+          height="70%"
+          src="https://youtube.com/embed/zWwEM4_rDfA"
+        >
+        </iframe>
+      </div>
     </div>
+    <%- include("common/footer.ejs") %>
+    <script>
+      AOS.init({
+        once: true,
+      });
+    </script>
   </body>
 </html>

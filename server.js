@@ -154,6 +154,11 @@ app.get("/admin", (req, res) => {
   res.render("admin_login"); // admin_login.ejs 파일로 응답
 });
 
+//브랜드스토리 로그인 페이지
+app.get("/story", (req, res) => {
+  res.render("story"); // story.ejs 파일로 응답
+});
+
 //관리자 화면 로그인 유무 확인
 app.post(
   "/login",
@@ -177,6 +182,18 @@ app.get("/admin/prdlist", (req, res) => {
     .toArray((err, result) => {
       res.render("admin_prdlist", { prdData: result, userData: req.user });
     });
+});
+
+//게시글 삭제처리 get 요청
+app.get("/delete/:no", function (req, res) {
+  //db안에 해당 게시글 번호에 맞는 데이터만 삭제 처리
+  db.collection("port2_prdlist").deleteOne(
+    { num: Number(req.params.no) },
+    function (err, result) {
+      //게시글 목록페이지로 이동
+      res.redirect("/admin/prdlist");
+    }
+  );
 });
 
 //상품을 DB에 넣는 경로 //첨부한 이미지 name값
