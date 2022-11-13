@@ -8,6 +8,13 @@
     <link href="/css/styles.css" rel="stylesheet" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/hamburgers/1.2.1/hamburgers.min.css"
+      integrity="sha512-+mlclc5Q/eHs49oIOCxnnENudJWuNqX5AogCiqRBgKnpoplPzETg2fkgBFVC6WYUVxYYljuxPNG8RE7yBy1K+g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
   </head>
   <body>
     <%- include("common/header.ejs") %>
@@ -69,6 +76,18 @@
     <script>
       AOS.init({
         once: true,
+      });
+    </script>
+    <script>
+      let hamMenu = document.querySelector(".hamburger");
+      let mobileMenu = document.querySelector("#header .header-mobileMenu");
+      hamMenu.addEventListener("click", () => {
+        hamMenu.classList.toggle("is-active");
+        if (!hamMenu.classList.contains("is-active")) {
+          mobileMenu.style.right = "-320px";
+        } else {
+          mobileMenu.style.width = "0px";
+        }
       });
     </script>
   </body>

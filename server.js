@@ -154,6 +154,11 @@ app.get("/admin", (req, res) => {
   res.render("admin_login"); // admin_login.ejs 파일로 응답
 });
 
+//뉴스 화면 페이지
+app.get("/news", (req, res) => {
+  res.render("news");
+});
+
 //브랜드스토리 로그인 페이지
 app.get("/story", (req, res) => {
   res.render("story"); // story.ejs 파일로 응답
@@ -225,4 +230,67 @@ app.post("/add/prdlist", upload.single("thumbnail"), (req, res) => {
       }
     );
   });
+});
+
+//매장 검색 화면 페이지(사용자)
+app.get("/store", (req, res) => {
+  db.collection("port2_storelist")
+    .find({})
+    .toArray((err, result) => {
+      res.render("store", { storeData: result });
+    });
+});
+
+//매장 지역검색 결과화면 페이지(사용자)
+app.get("/search/local", (req, res) => {
+  //시/도 선택시
+  if (req.query.city1 !== "" && req.query.city2 === "") {
+    db.collection("port2_storelist")
+      .find({ sido: req.query.city1 })
+      .toArray((err, result) => {
+        res.render("store", { storeData: result });
+      });
+  }
+  //시/도 구/군 선택시
+  else if (req.query.city1 !== "" && req.query.city2 !== "") {
+    db.collection("port2_storelist")
+      .find({ sido: req.query.city1, sigugun: req.query.city2 })
+      .toArray((err, result) => {
+        res.render("store", { storeData: result });
+      });
+  }
+  //아무것도 선택하지 않았을때
+  else {
+    res.redirect("/store");
+  }
+});
+
+//매장명으로 검색시 (사용자)
+app.get("/search/storename", (req, res) => {
+  //query: <-- store.ejs 파일에서 입력한 input text -> req.query.name
+  //path: <-- db storelist 콜렉션에서 어떤 항목명으로 찾을건지 name
+
+  let storeSearch = [
+    {
+      $search: {
+        index: "store_search",
+        text: {
+          query: req.query.name,
+          path: "name",
+        },
+      },
+    },
+  ];
+  //검색어 입력시
+  if (req.query.name !== "") {
+    db.collection("port2_storelist")
+      .aggregate(storeSearch)
+      .toArray((err, result) => {
+        res.render("store", { storeData: result });
+      });
+  }
+  //검색어 미입력시
+  else {
+    res.redirect("/store");
+  }
 });

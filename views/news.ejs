@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>캐러셀 기능 구현</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      img {
+        vertical-align: middle;
+      }
+      .cont1 {
+        background-color: pink;
+        padding: 100px 0;
+        display: flex;
+        justify-content: center;
+      }
+      .ca_wrap {
+        width: 80%;
+        background-color: yellow;
+        overflow: hidden;
+      }
+      .ca_wrap h2 {
+        text-align: center;
+      }
+      .ca_move {
+        width: 200%;
+        display: flex;
+      }
+      .ca_move .ca_child {
+        width: 12.5%;
+        box-sizing: border-box;
+        padding: 0 1%;
+      }
+      .ca_move .ca_child img {
+        width: 100%;
+      }
+      .ca_prev,
+      .ca_next {
+        margin: 20px 0;
+      }
+
+      @media screen and (max-width: 1600px) {
+        .ca_wrap {
+          width: 70%;
+        }
+        .ca_move {
+          width: 266.666666%;
+        }
+      }
+
+      @media screen and (max-width: 1024px) {
+        .ca_wrap {
+          width: 90%;
+        }
+        .ca_move {
+          width: 400%;
+        }
+      }
+      @media screen and (max-width: 768px) {
+        .ca_wrap {
+          width: 100%;
+        }
+        .ca_move {
+          width: 800%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div class="cont1">
+        <!--캐러셀 보여줄 영역(overflow:hidden)-->
+        <div class="ca_wrap">
+          <h2>캐러셀 연습</h2>
+          <!--캐러셀 움직이는 기차역할!-->
+          <div class="ca_move">
+            <div class="ca_child"><img src="image/se2_img01.jpg" /></div>
+            <div class="ca_child"><img src="image/se2_img02.jpg" /></div>
+            <div class="ca_child"><img src="image/se2_img03.jpg" /></div>
+            <div class="ca_child"><img src="image/se2_img04.jpg" /></div>
+            <div class="ca_child"><img src="image/se2_img05.jpg" /></div>
+            <div class="ca_child"><img src="image/se2_img06.jpg" /></div>
+            <div class="ca_child"><img src="image/se2_img07.jpg" /></div>
+            <div class="ca_child"><img src="image/se2_img08.jpg" /></div>
+          </div>
+          <div class="ca_prev">이전버튼</div>
+          <div class="ca_next">이후버튼</div>
+        </div>
+      </div>
+    </div>
+    <script>
+      //캐러셀 움직이는 대상 및 순성변경될때 감싸는 부모역할
+      const ca_move = document.querySelector(".ca_move");
+      const prevBtn = document.querySelector(".ca_prev");
+      const nextBtn = document.querySelector(".ca_next");
+
+      //화면사이즈에 따라 marginLeft값 / 원위치되는 수치값 변경
+      let prevChangeMargin;
+      let setMargin;
+
+      let browserSizeCheck = () => {
+        if (window.matchMedia("screen and (min-width: 1601px)").matches) {
+          prevChangeMargin = "-50%"; // 이전버튼 클릭시 이동되는 거리값
+          setMargin = "-25%"; // 이동후 원위치되는 수치값
+        } else if (
+          window.matchMedia(
+            "screen and (max-width: 1600px) and (min-width: 1025px)"
+          ).matches
+        ) {
+          prevChangeMargin = "-66.66666%";
+          setMargin = "-33.333333%";
+        } else if (
+          window.matchMedia(
+            "screen and (max-width: 1024px) and (min-width: 769px)"
+          ).matches
+        ) {
+          prevChangeMargin = "-100%";
+          setMargin = "-50%";
+        } else if (window.matchMedia("screen and (max-width: 768px").matches) {
+          prevChangeMargin = "-200%";
+          setMargin = "-100%";
+        }
+        ca_move.style.marginLeft = setMargin;
+      };
+      window.addEventListener("resize", () => {
+        browserSizeCheck(); //웹브라우저 창 크기 조절시 조건문 체크
+        //prevChangeMargin / setMargin 값이 변경처리
+      });
+      window.addEventListener("load", () => {
+        browserSizeCheck(); //웹브라우저 화면 로딩후 조건문 체크
+        //prevChangeMargin / setMargin 값이 변경처리
+      });
+
+      //prev 클릭시 캐러셀 이동후 순서 교체후 원위치 시키는 작업까지
+      prevBtn.addEventListener("click", () => {
+        ca_move.style.transition = "all 0.5s";
+        ca_move.style.marginLeft = prevChangeMargin;
+        // prevBtn.style.display = "none";
+        // nextBtn.style.display = "none";
+        //이전버튼 클릭시 첫번째 자식요소 선택!
+        let fChild = ca_move.firstElementChild;
+        setTimeout(() => {
+          //첫번째 자식요소를 마지막번째로 보내줌
+          ca_move.append(fChild);
+          //태그 순서 교체후 원위치
+          ca_move.style.marginLeft = setMargin;
+          ca_move.style.transition = "none";
+          //   prevBtn.style.display = "block";
+          //   nextBtn.style.display = "block";
+        }, 500);
+      });
+      //next 클릭시 캐러셀 이동후 순서 교체후 원위치 시키는 작업까지
+      nextBtn.addEventListener("click", () => {
+        ca_move.style.transition = "all 0.5s";
+        ca_move.style.marginLeft = "0%";
+        // prevBtn.style.display = "none";
+        // nextBtn.style.display = "none";
+        //이전버튼 클릭시 첫번째 자식요소 선택!
+        let lChild = ca_move.lastElementChild;
+        setTimeout(() => {
+          //첫번째 자식요소를 마지막번째로 보내줌
+          ca_move.prepend(lChild);
+          //태그 순서 교체후 원위치
+          ca_move.style.marginLeft = setMargin;
+          ca_move.style.transition = "none";
+          //   prevBtn.style.display = "block";
+          //   nextBtn.style.display = "block";
+        }, 500);
+      });
+    </script>
+  </body>
+</html>
