@@ -172,12 +172,14 @@ body {
   display: block;
   width: 150px;
   height: 0px;
+  transition: all 0.2s;
 }
 #header .header-top .gnb ul li .depth2 li {
   display: none;
   line-height: 50px;
 }
 #header .header-top .gnb ul li .depth2 li a {
+  opacity: 0;
   font-weight: 400;
 }
 #header .header-top .gnb ul:hover .depth2 {
@@ -193,6 +195,7 @@ body {
 }
 #header .header-top .gnb ul:hover .depth2 li a {
   transition: color 0.3s ease-in-out;
+  opacity: 1;
 }
 #header .header-top .gnb ul:hover .depth2 li:hover {
   box-shadow: inset 150px 0 0 0 #e11383;
@@ -374,7 +377,6 @@ body {
 #cont2 .right .recom .images {
   position: absolute;
   display: flex;
-  top: 50%;
 }
 #cont2 .right .recom .images img {
   width: 100px;
