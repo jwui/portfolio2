@@ -288,7 +288,7 @@
         //이전버튼 클릭시 첫번째 자식요소 선택!
         let lChild = ca_move.lastElementChild;
         setTimeout(() => {
-          //첫번째 자식요소를 마지막번째로 보내줌
+          //마지막번째 자식요소를 첫번째로 보내줌
           ca_move.prepend(lChild);
           //태그 순서 교체후 원위치
           ca_move.style.marginLeft = setMargin;
