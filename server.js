@@ -149,6 +149,52 @@ app.get("/menu", (req, res) => {
     });
 });
 
+//관리자 매장등록 화면 페이지
+app.get("/admin/storelist", (req, res) => {
+  db.collection("port2_storelist")
+    .find({})
+    .toArray((err, result) => {
+      res.render("admin_store", { storeData: result, userData: req.user });
+    });
+}); //admin_store.ejs 파일로 응답
+
+//관리자 매장 삭제처리 get 요청
+app.get("/deletestore/:no", function (req, res) {
+  //db안에 해당 매장 번호에 맞는 데이터만 삭제 처리
+  db.collection("port2_storelist").deleteOne(
+    { num: Number(req.params.no) },
+    function (err, result) {
+      //매장 목록페이지로 이동
+      res.redirect("/admin/storelist");
+    }
+  );
+});
+
+//매장등록페이지에서 전송한 값 데이터베이스에 삽입
+app.post("/addstore", (req, res) => {
+  db.collection("port2_count").findOne({ name: "매장등록" }, (err, result1) => {
+    db.collection("port2_storelist").insertOne(
+      {
+        num: result1.storeCount + 1,
+        name: req.body.name,
+        sido: req.body.city1,
+        sigugun: req.body.city2,
+        address: req.body.detail,
+        phone: req.body.phone,
+      },
+      (err, result) => {
+        db.collection("port2_count").updateOne(
+          { name: "매장등록" },
+          { $inc: { storeCount: 1 } },
+          (err, result) => {
+            res.redirect("/admin/storelist"); //매장등록 페이지로 이동
+          }
+        );
+      }
+    );
+  });
+});
+
 //관리자 화면 로그인 페이지
 app.get("/admin", (req, res) => {
   res.render("admin_login"); // admin_login.ejs 파일로 응답
@@ -189,13 +235,52 @@ app.get("/admin/prdlist", (req, res) => {
     });
 });
 
-//게시글 삭제처리 get 요청
+//상품 삭제처리 get 요청
 app.get("/delete/:no", function (req, res) {
   //db안에 해당 게시글 번호에 맞는 데이터만 삭제 처리
   db.collection("port2_prdlist").deleteOne(
     { num: Number(req.params.no) },
     function (err, result) {
       //게시글 목록페이지로 이동
+      res.redirect("/admin/prdlist");
+    }
+  );
+});
+
+//상품 수정화면 페이지 get 요청
+app.get("/prdupt/:no", function (req, res) {
+  //db안에 해당 게시글번호에 맞는 데이터를 꺼내오고 ejs파일로 응답
+  db.collection("port2_prdlist").findOne(
+    { num: Number(req.params.no) },
+    function (err, result) {
+      res.render("prdupt", {
+        prdData: result,
+        userData: req.user,
+      });
+    }
+  );
+  //input, textarea에다가 작성내용 미리 보여줌
+});
+
+app.post("/update", upload.single("thumbfile"), function (req, res) {
+  //db에 해당 게시글 번호에 맞는 게시글 수정처리
+  if (req.file) {
+    fileUpload = req.file.originalname;
+  } else {
+    fileUpload = req.body.fileOrigin;
+  }
+
+  db.collection("port2_prdlist").updateOne(
+    { num: Number(req.body.num) },
+    {
+      $set: {
+        name: req.body.name,
+        thumbnail: fileUpload,
+        category: req.body.category,
+      },
+    },
+    //해당 게시글 상세화면 페이지로 이동
+    function (err, result) {
       res.redirect("/admin/prdlist");
     }
   );

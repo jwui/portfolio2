@@ -6,8 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>브랜드 스토리</title>
     <link href="/css/styles.css" rel="stylesheet" />
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dongle:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.3.2/countUp.umd.min.js"
+      integrity="sha512-Be9XaN4NvN8CVmbk4juf7JX2/87a7I37CX1WV37w+jyav4exBHDqHzmjs+Tbx7Dt2j9vpULDZNxcP0sZP03/WQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/hamburgers/1.2.1/hamburgers.min.css"
@@ -74,11 +96,6 @@
     </div>
     <%- include("common/footer.ejs") %>
     <script>
-      AOS.init({
-        once: true,
-      });
-    </script>
-    <script>
       let hamMenu = document.querySelector(".hamburger");
       let mobileMenu = document.querySelector("#header .header-mobileMenu");
       hamMenu.addEventListener("click", () => {
@@ -86,8 +103,23 @@
         if (!hamMenu.classList.contains("is-active")) {
           mobileMenu.style.right = "-320px";
         } else {
-          mobileMenu.style.width = "0px";
+          mobileMenu.style.right = "0px";
         }
+      });
+
+      let clickBtn = document.querySelectorAll(
+        "#header .header-mobileMenu .navMenu .menuList ul .menu"
+      );
+      let depth2 = document.querySelectorAll(
+        "#header .header-mobileMenu .navMenu .menuList ul li .depth2"
+      );
+      clickBtn.forEach((item, index) => {
+        item.addEventListener("click", () => {
+          depth2.forEach((item, index) => {
+            item.classList.remove("on");
+          });
+          depth2[index].classList.add("on");
+        });
       });
     </script>
   </body>

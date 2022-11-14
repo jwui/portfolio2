@@ -38,6 +38,7 @@
           <div>매장전화번호</div>
           <div><%- storeData[i].phone %></div>
         </div>
+        <a href="/deletestore/<%- storeData[i].num %>">삭제</a>
       </div>
       <% } %>
     </div>
@@ -52,9 +53,9 @@
         <option value>구/군 선택</option>
       </select>
       <!--매장명-->
-      <input type="text" name="name" required />
+      <input type="text" name="name" required placeholder="매장명 입력" />
       <!--매장전화번호-->
-      <input tpye="text" name="phone" required />
+      <input tpye="text" name="phone" required placeholder="전화번호 입력" />
       <!--매장위치 검색기능-->
       <input
         type="text"

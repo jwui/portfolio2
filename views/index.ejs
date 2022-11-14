@@ -262,10 +262,10 @@
       let mobileMenu = document.querySelector("#header .header-mobileMenu");
       hamMenu.addEventListener("click", () => {
         hamMenu.classList.toggle("is-active");
-        if (!hamMenu.classList.contains("is-active")) {
-          mobileMenu.style.right = "-320px";
+        if (hamMenu.classList.contains("is-active")) {
+          mobileMenu.style.right = "0px";
         } else {
-          mobileMenu.style.width = "0px";
+          mobileMenu.style.right = "-320px";
         }
       });
 

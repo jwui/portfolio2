@@ -5,58 +5,132 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>매장안내</title>
+    <link href="/css/styles.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dongle:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.3.2/countUp.umd.min.js"
+      integrity="sha512-Be9XaN4NvN8CVmbk4juf7JX2/87a7I37CX1WV37w+jyav4exBHDqHzmjs+Tbx7Dt2j9vpULDZNxcP0sZP03/WQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/hamburgers/1.2.1/hamburgers.min.css"
+      integrity="sha512-+mlclc5Q/eHs49oIOCxnnENudJWuNqX5AogCiqRBgKnpoplPzETg2fkgBFVC6WYUVxYYljuxPNG8RE7yBy1K+g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
   </head>
   <body>
-    <!--매장 검색시 검색결과 없는 경우 -->
-    <% if(storeData.length == 0) { %>
-    <div>해당하는 매장이 없습니다</div>
-    <% } else { %>
-    <!--처음들어왔을 때 모든 매장 리스트 보여줌-->
-    <% for(let i=0; i< storeData.length; i++) { %>
-    <div class="list" style="margin-bottom: 30px">
-      <div class="line">
-        <div>매장명</div>
-        <div><%- storeData[i].name %></div>
-      </div>
-      <div class="line">
-        <div>위치</div>
-        <div><%- storeData[i].sido + storeData[i].sigugun %></div>
-      </div>
-      <div class="line">
-        <div>상세주소</div>
-        <div><%- storeData[i].address %></div>
-      </div>
-      <div class="line">
-        <div>전화번호</div>
-        <div><%- storeData[i].phone %></div>
-      </div>
-    </div>
-    <% } %> <% } %>
+    <div id="storecont">
+      <%- include("common/header.ejs") %>
+      <!--매장 검색시 검색결과 없는 경우 -->
+      <% if(storeData.length == 0) { %>
+      <div class="nostore">해당하는 매장이 없습니다</div>
+      <% } else { %>
+      <!--사용자가 등록 매장검색구간-->
+      <div class="heading">매장안내</div>
+      <form class="searchform1" action="/search/local" method="get">
+        <div>
+          <div>지역으로 검색</div>
+          <!--시/도 선택-->
+          <select class="city1" name="city1">
+            <option value>시/도 선택</option>
+          </select>
+          <!--구/군 선택-->
+          <select class="city2" name="city2">
+            <option value>구/군 선택</option>
+          </select>
+          <button type="submit">검색</button>
+        </div>
+      </form>
+      <form class="searchform2" action="/search/storename" method="get">
+        <div>
+          <div>매장명으로 검색</div>
+          <input type="text" name="name" />
+          <button type="submit">검색</button>
+        </div>
+      </form>
 
-    <!--사용자가 등록 매장검색구간-->
-    <form action="/search/local" method="get">
-      <div style="border: 1px solid red">
-        <div>지역으로 검색</div>
-        <!--시/도 선택-->
-        <select class="city1" name="city1">
-          <option value>시/도 선택</option>
-        </select>
-        <!--구/군 선택-->
-        <select class="city2" name="city2">
-          <option value>구/군 선택</option>
-        </select>
-        <button type="submit">검색</button>
+      <!--처음들어왔을 때 모든 매장 리스트 보여줌-->
+      <div class="title">매장 리스트</div>
+      <div class="header">
+        <div class="line">
+          <div>매장명</div>
+        </div>
+        <div class="line">
+          <div>위치</div>
+        </div>
+        <div class="line">
+          <div>상세주소</div>
+        </div>
+        <div class="line">
+          <div>전화번호</div>
+        </div>
       </div>
-    </form>
-    <form action="/search/storename" method="get">
-      <div style="border: 1px solid green">
-        <div>매장명으로 검색</div>
-        <input type="text" name="name" />
-        <button type="submit">검색</button>
+      <% for(let i=0; i< storeData.length; i++) { %>
+      <div class="list">
+        <div class="line">
+          <div><%- storeData[i].name %></div>
+        </div>
+        <div class="line">
+          <div><%- storeData[i].sido + "\u00A0" + storeData[i].sigugun %></div>
+        </div>
+        <div class="line">
+          <div><%- storeData[i].address %></div>
+        </div>
+        <div class="line">
+          <div><%- storeData[i].phone %></div>
+        </div>
       </div>
-    </form>
+      <% } %> <% } %>
+    </div>
+    <%- include("common/footer.ejs") %>
     <script src="/js/hangjungdong.js"></script>
     <script src="/js/storeselect.js"></script>
-    
+    <script>
+      let hamMenu = document.querySelector(".hamburger");
+      let mobileMenu = document.querySelector("#header .header-mobileMenu");
+      hamMenu.addEventListener("click", () => {
+        hamMenu.classList.toggle("is-active");
+        if (!hamMenu.classList.contains("is-active")) {
+          mobileMenu.style.right = "-320px";
+        } else {
+          mobileMenu.style.width = "0px";
+        }
+      });
+
+      let clickBtn = document.querySelectorAll(
+        "#header .header-mobileMenu .navMenu .menuList ul .menu"
+      );
+      let depth2 = document.querySelectorAll(
+        "#header .header-mobileMenu .navMenu .menuList ul li .depth2"
+      );
+      clickBtn.forEach((item, index) => {
+        item.addEventListener("click", () => {
+          depth2.forEach((item, index) => {
+            item.classList.remove("on");
+          });
+          depth2[index].classList.add("on");
+        });
+      });
+    </script>
   </body>
 </html>
