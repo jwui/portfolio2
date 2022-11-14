@@ -246,7 +246,7 @@ body {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  font-size: 64px;
+  font-size: 48px;
   color: #fff;
 }
 #cont1 .swiper {
@@ -391,7 +391,7 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-size: 64px;
+  font-size: 48px;
   font-weight: bold;
 }
 #cont3 .bot {
@@ -464,7 +464,7 @@ body {
 }
 #cont4 .left .contents .title {
   color: #f5821f;
-  font-size: 64px;
+  font-size: 48px;
   font-weight: bold;
   margin-bottom: 60px;
 }
@@ -490,7 +490,7 @@ body {
 }
 #cont4 .left .countbox h2 {
   color: #f5821f;
-  font-size: 64px;
+  font-size: 48px;
   font-weight: bold;
   margin-bottom: 60px;
   display: inline;
@@ -559,7 +559,7 @@ body {
   padding-top: 120px;
   box-sizing: border-box;
   color: #f5821f;
-  font-size: 64px;
+  font-size: 48px;
   font-weight: bold;
   text-align: center;
 }
@@ -591,7 +591,7 @@ body {
   height: 500px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   flex-direction: column;
 }
 #footer .logo {
@@ -638,7 +638,7 @@ body {
 }
 #menucont .center .title {
   color: #f5821f;
-  font-size: 64px;
+  font-size: 48px;
   margin-top: 202px;
   margin-bottom: 100px;
   margin-left: 10%;
@@ -726,7 +726,7 @@ body {
 #storycont .cont1 .right h1 {
   margin-bottom: 120px;
   color: #f5821f;
-  font-size: 64px;
+  font-size: 48px;
 }
 #storycont .cont1 .right h2 {
   margin-bottom: 60px;
@@ -761,7 +761,7 @@ body {
 #storycont .cont2 .right h1 {
   margin-bottom: 120px;
   color: #f5821f;
-  font-size: 64px;
+  font-size: 48px;
 }
 #storycont .cont2 .right h2 {
   margin-bottom: 60px;
@@ -787,16 +787,20 @@ body {
 }
 #storecont .nostore {
   color: #f5821f;
-  font-size: 48px;
+  font-size: 32px;
   height: 50vh;
-  margin-top: 50vh;
+  padding-top: 50vh;
   text-align: center;
+  background-image: url("/img/notfound.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 #storecont .heading {
   text-align: center;
-  font-size: 64px;
+  font-size: 48px;
   color: #f5821f;
-  margin: 64px;
+  margin: 48px;
   margin-top: 166px;
   font-weight: bold;
 }
@@ -1009,19 +1013,10 @@ body {
   }
 }
 @media screen and (max-width: 930px) {
-  #cont1 .swiper .swiper-wrapper .swiper-slide h2 {
-    font-size: 48px;
-  }
   #cont2 .right .contents .title {
     font-size: 40px;
   }
   #cont3 .top {
-    font-size: 48px;
-  }
-  #cont4 .left .contents .title {
-    font-size: 48px;
-  }
-  #cont5 .title {
     font-size: 48px;
   }
   #cont5 .cards .card {
@@ -1072,8 +1067,8 @@ body {
   #cont5 {
     height: auto;
   }
-  #cont5 .title {
-    font-size: 48px;
+  #cont5 .circleEffect {
+    display: none;
   }
   #cont5 .cards {
     flex-direction: column;
