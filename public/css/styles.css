@@ -643,6 +643,7 @@ body {
   margin-bottom: 100px;
   margin-left: 10%;
   margin-right: 5%;
+  font-weight: bold;
 }
 #menucont .center .select {
   display: flex;
