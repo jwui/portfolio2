@@ -104,7 +104,6 @@ const storage = multer.diskStorage({
   },
 });
 const upload = multer({ storage: storage });
-
 //커피 메뉴 페이지
 app.get("/menu/coffee", (req, res) => {
   db.collection("port2_prdlist")
@@ -146,6 +145,15 @@ app.get("/menu", (req, res) => {
     .find({})
     .toArray((err, result) => {
       res.render("menu", { prdData: result });
+    });
+});
+
+//상품 상세페이지 get 요청
+app.get("/menudetail/:no", (req, res) => {
+  db.collection("port2_prdlist")
+    .find({})
+    .toArray((err, result) => {
+      res.render("menu_detail", { prdData: result });
     });
 });
 
@@ -193,6 +201,40 @@ app.post("/addstore", (req, res) => {
       }
     );
   });
+});
+
+//매장 수정화면 페이지 get 요청
+app.get("/storeupt/:no", function (req, res) {
+  //db안에 해당 게시글번호에 맞는 데이터를 꺼내오고 ejs파일로 응답
+  db.collection("port2_storelist").findOne(
+    { num: Number(req.params.no) },
+    function (err, result) {
+      res.render("storeupt", {
+        storeData: result,
+        userData: req.user,
+      });
+    }
+  );
+  //input, textarea에다가 작성내용 미리 보여줌
+});
+
+app.post("/updatestore", function (req, res) {
+  db.collection("port2_storelist").updateOne(
+    { num: Number(req.body.num) },
+    {
+      $set: {
+        name: req.body.name,
+        sido: req.body.sido,
+        sigugun: req.body.sigugun,
+        address: req.body.address,
+        phone: req.body.phone,
+      },
+    },
+    //해당 게시글 상세화면 페이지로 이동
+    function (err, result) {
+      res.redirect("/admin/storelist");
+    }
+  );
 });
 
 //관리자 화면 로그인 페이지
@@ -262,7 +304,7 @@ app.get("/prdupt/:no", function (req, res) {
   //input, textarea에다가 작성내용 미리 보여줌
 });
 
-app.post("/update", upload.single("thumbfile"), function (req, res) {
+app.post("/updateprd", upload.single("thumbfile"), function (req, res) {
   //db에 해당 게시글 번호에 맞는 게시글 수정처리
   if (req.file) {
     fileUpload = req.file.originalname;

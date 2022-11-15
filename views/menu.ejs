@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>메뉴소개 페이지</title>
+    <title>메뉴 상세페이지</title>
     <link href="/css/styles.css" rel="stylesheet" />
     <link
       rel="stylesheet"
@@ -54,7 +54,9 @@
           <% for(let i=0; i< prdData.length; i++) { %>
           <div class="list">
             <img src="/upload/<%- prdData[i].thumbnail %>" />
-            <p><%- prdData[i].name %></p>
+            <a href="/menudetail/<%- prdData[i].num %>"
+              ><p><%- prdData[i].name %></p></a
+            >
           </div>
           <% } %>
         </div>
@@ -86,6 +88,18 @@
           });
           depth2[index].classList.add("on");
         });
+      });
+
+      //현재 접속한 url 주소값 가져오기
+      let currentPath = window.location.pathname;
+
+      const selectMenu = document.querySelectorAll(".select li");
+
+      selectMenu.forEach((item, index) => {
+        let selMenuChild = item.querySelector("a").getAttribute("href");
+        if (currentPath === selMenuChild) {
+          item.classList.add("on");
+        }
       });
     </script>
   </body>

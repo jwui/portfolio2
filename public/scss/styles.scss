@@ -53,7 +53,7 @@ body {
     height: 100%;
     z-index: 10;
     background-color: #fff;
-    transition: all 0.5s;
+    transition: all 0.3s;
     opacity: 0.9;
     .navMenu {
       display: flex;
@@ -169,13 +169,13 @@ body {
             display: block;
             width: 150px;
             height: 0px;
-            transition: all 0.2s;
+            transition: all 0.1s;
             li {
               display: none;
               line-height: 50px;
               a {
-                opacity: 0;
                 font-weight: 400;
+                transition: all 0.3s;
               }
             }
           }
@@ -192,7 +192,6 @@ body {
               transition: box-shadow 0.3s ease-in-out;
               a {
                 transition: color 0.3s ease-in-out;
-                opacity: 1;
               }
               &:hover {
                 box-shadow: inset 150px 0 0 0 #e11383;
@@ -294,7 +293,6 @@ body {
   .left {
     height: 100vh;
     width: 50%;
-    background-color: aqua;
     position: relative;
     .title {
       padding-top: 120px;
@@ -316,7 +314,6 @@ body {
           line-height: 40px;
           position: relative;
           width: 0px;
-
           transition: all 0.3s;
         }
         a.on::after {
@@ -333,7 +330,7 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    transition: all 0.5s;
+    transition: all 0.3s;
   }
   .right {
     width: 50%;
@@ -555,19 +552,19 @@ $animationSpeed: 40s;
 
 #cont5 {
   background-color: #f8faf0;
-  height: 100vh;
+  height: 90vh;
   position: relative;
   .circleEffect {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     background-color: transparent;
     position: absolute;
     top: 50px;
     left: 10%;
     .circle {
       position: absolute;
-      width: 200px;
-      height: 200px;
+      width: 150px;
+      height: 150px;
 
       animation: circle-linear 5s linear infinite;
       transition: 5s linear infinite;
@@ -694,8 +691,7 @@ $animationSpeed: 40s;
           color: #f5821f;
           opacity: 0.5;
           transition: all 0.3s;
-          font-weight: bold;
-          font-size: 30px;
+          font-size: 24px;
           &:hover {
             opacity: 1;
           }
@@ -704,10 +700,15 @@ $animationSpeed: 40s;
           display: block;
           content: "";
           width: 100%;
-          height: 4px;
+          height: 2px;
           background-color: #f5821f;
           position: relative;
           top: 8px;
+        }
+      }
+      li.on {
+        a {
+          opacity: 1;
         }
       }
     }
@@ -734,8 +735,10 @@ $animationSpeed: 40s;
           border-radius: 100px;
           overflow: hidden;
           transition: all 0.3s;
+
           &:hover {
             scale: 1.1;
+            background-color: rgba(245, 130, 31, 0.4);
           }
         }
       }
@@ -827,7 +830,6 @@ $animationSpeed: 40s;
 }
 
 #storecont {
-  overflow-x: scroll;
   .nostore {
     color: #f5821f;
     font-size: 32px;
@@ -847,99 +849,107 @@ $animationSpeed: 40s;
     margin-top: 166px;
     font-weight: bold;
   }
-  .title {
-    color: #f5821f;
-    font-size: 48px;
-    padding: 60px;
-    text-align: center;
-  }
-  .header {
-    width: 800px;
-    display: flex;
-    margin: 0 auto;
-    color: #f5821f;
-    border-top: 1px solid #f5821f;
-    border-bottom: 1px solid #f5821f;
-    padding: 0 100px;
-    .line {
-      display: flex;
-      line-height: 60px;
-      width: 20%;
-      &:nth-of-type(3) {
-        width: 40%;
-      }
-    }
-  }
-  .list {
-    width: 800px;
-    display: flex;
-    margin: 0 auto;
-    color: #f5821f;
-    padding: 0 100px;
-    .line {
-      display: flex;
-      width: 20%;
-      line-height: 60px;
-      &:nth-of-type(3) {
-        width: 40%;
-      }
-    }
-  }
-  .list:last-of-type {
-    margin-bottom: 120px;
-  }
-  .searchform1 {
-    width: 300px;
-    margin: 0 auto;
-    line-height: 50px;
-    > div {
+  .header_wrap {
+    overflow-x: scroll;
+    .title {
       color: #f5821f;
-      font-size: 20px;
-    }
-    .city1 {
-      height: 50px;
-      border: 1px solid #e4e4e4;
-      color: #f5821f;
-      width: 100px;
-    }
-    .city2 {
-      height: 50px;
-      border: 1px solid #e4e4e4;
-      color: #f5821f;
-      width: 100px;
-    }
-    button {
-      height: 50px;
-      width: 80px;
-      background: none;
-      border: 1px solid #f5821f;
-      color: #f5821f;
-      position: relative;
-      top: 2px;
-    }
-  }
-  .searchform2 {
-    width: 300px;
-    margin: 0 auto;
-    line-height: 50px;
-    > div {
-      color: #f5821f;
-      font-size: 20px;
-    }
-    input {
-      height: 50px;
-      border: 1px solid #e4e4e4;
-      color: #f5821f;
+      font-size: 48px;
+      margin: 60px;
+      text-align: center;
     }
 
-    button {
-      height: 50px;
-      width: 80px;
-      background: none;
-      border: 1px solid #f5821f;
+    .header {
+      width: 1200px;
+      display: flex;
+      margin: 0 auto;
       color: #f5821f;
-      position: relative;
-      top: 1px;
+      border-top: 1px solid #f5821f;
+      border-bottom: 1px solid #f5821f;
+      padding: 0 50px;
+      .line {
+        display: flex;
+        line-height: 60px;
+        width: 20%;
+        &:nth-of-type(3) {
+          width: 40%;
+        }
+      }
+    }
+    .list {
+      width: 1200px;
+      display: flex;
+      margin: 0 auto;
+      color: #f5821f;
+      padding: 0 50px;
+      .line {
+        display: flex;
+        width: 20%;
+        line-height: 60px;
+        &:nth-of-type(3) {
+          width: 40%;
+        }
+      }
+    }
+    .list:last-of-type {
+      margin-bottom: 120px;
+    }
+    .searchform1 {
+      width: 300px;
+      margin: 0 auto;
+      line-height: 50px;
+      > div {
+        color: #f5821f;
+        font-size: 20px;
+      }
+      .city1 {
+        height: 50px;
+        border: 1px solid #e4e4e4;
+        color: #f5821f;
+        width: 100px;
+      }
+      .city2 {
+        height: 50px;
+        border: 1px solid #e4e4e4;
+        color: #f5821f;
+        width: 100px;
+      }
+      button {
+        height: 50px;
+        width: 80px;
+        background: none;
+        border: 1px solid #f5821f;
+        color: #f5821f;
+        position: relative;
+        top: 2px;
+      }
+    }
+    .searchform2 {
+      width: 300px;
+      margin: 0 auto;
+      line-height: 50px;
+      > div {
+        color: #f5821f;
+        font-size: 20px;
+      }
+      input {
+        height: 50px;
+        line-height: 50px;
+        border: 1px solid #e4e4e4;
+        color: #f5821f;
+        text-indent: 10px;
+        position: relative;
+        top: -1px;
+      }
+
+      button {
+        height: 50px;
+        width: 80px;
+        background: none;
+        border: 1px solid #f5821f;
+        color: #f5821f;
+        position: relative;
+        top: 1px;
+      }
     }
   }
 }
@@ -971,7 +981,6 @@ $animationSpeed: 40s;
     .left {
       height: 500px;
       width: 100%;
-      background-color: aqua;
       position: relative;
       .title {
         text-align: center;
@@ -1111,9 +1120,12 @@ $animationSpeed: 40s;
       .card {
         margin: 20px;
         img {
-          width: 200px;
-          height: 300px;
+          width: 300px;
+          height: 400px;
         }
+      }
+      .card:last-of-type {
+        display: none;
       }
     }
   }

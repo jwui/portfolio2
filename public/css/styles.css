@@ -62,7 +62,7 @@ body {
   height: 100%;
   z-index: 10;
   background-color: #fff;
-  transition: all 0.5s;
+  transition: all 0.3s;
   opacity: 0.9;
 }
 #header .header-mobileMenu .navMenu {
@@ -172,15 +172,15 @@ body {
   display: block;
   width: 150px;
   height: 0px;
-  transition: all 0.2s;
+  transition: all 0.1s;
 }
 #header .header-top .gnb ul li .depth2 li {
   display: none;
   line-height: 50px;
 }
 #header .header-top .gnb ul li .depth2 li a {
-  opacity: 0;
   font-weight: 400;
+  transition: all 0.3s;
 }
 #header .header-top .gnb ul:hover .depth2 {
   display: block;
@@ -195,7 +195,6 @@ body {
 }
 #header .header-top .gnb ul:hover .depth2 li a {
   transition: color 0.3s ease-in-out;
-  opacity: 1;
 }
 #header .header-top .gnb ul:hover .depth2 li:hover {
   box-shadow: inset 150px 0 0 0 #e11383;
@@ -288,13 +287,12 @@ body {
 #cont2 .left {
   height: 100vh;
   width: 50%;
-  background-color: aqua;
   position: relative;
   background-image: url("/img/menu1.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  transition: all 0.5s;
+  transition: all 0.3s;
 }
 #cont2 .left .title {
   padding-top: 120px;
@@ -525,12 +523,12 @@ body {
 
 #cont5 {
   background-color: #f8faf0;
-  height: 100vh;
+  height: 90vh;
   position: relative;
 }
 #cont5 .circleEffect {
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   background-color: transparent;
   position: absolute;
   top: 50px;
@@ -538,8 +536,8 @@ body {
 }
 #cont5 .circleEffect .circle {
   position: absolute;
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   animation: circle-linear 5s linear infinite;
   transition: 5s linear infinite;
 }
@@ -661,8 +659,7 @@ body {
   color: #f5821f;
   opacity: 0.5;
   transition: all 0.3s;
-  font-weight: bold;
-  font-size: 30px;
+  font-size: 24px;
 }
 #menucont .center .select li a:hover {
   opacity: 1;
@@ -671,10 +668,13 @@ body {
   display: block;
   content: "";
   width: 100%;
-  height: 4px;
+  height: 2px;
   background-color: #f5821f;
   position: relative;
   top: 8px;
+}
+#menucont .center .select li.on a {
+  opacity: 1;
 }
 #menucont .center .listwrap {
   display: flex;
@@ -704,6 +704,7 @@ body {
 }
 #menucont .center .listwrap .list img:hover {
   scale: 1.1;
+  background-color: rgba(245, 130, 31, 0.4);
 }
 
 #storycont .cont1 {
@@ -785,9 +786,6 @@ body {
   background-color: #f8faf0;
 }
 
-#storecont {
-  overflow-x: scroll;
-}
 #storecont .nostore {
   color: #f5821f;
   font-size: 32px;
@@ -807,69 +805,72 @@ body {
   margin-top: 166px;
   font-weight: bold;
 }
-#storecont .title {
+#storecont .header_wrap {
+  overflow-x: scroll;
+}
+#storecont .header_wrap .title {
   color: #f5821f;
   font-size: 48px;
-  padding: 60px;
+  margin: 60px;
   text-align: center;
 }
-#storecont .header {
-  width: 800px;
+#storecont .header_wrap .header {
+  width: 1200px;
   display: flex;
   margin: 0 auto;
   color: #f5821f;
   border-top: 1px solid #f5821f;
   border-bottom: 1px solid #f5821f;
-  padding: 0 100px;
+  padding: 0 50px;
 }
-#storecont .header .line {
+#storecont .header_wrap .header .line {
   display: flex;
   line-height: 60px;
   width: 20%;
 }
-#storecont .header .line:nth-of-type(3) {
+#storecont .header_wrap .header .line:nth-of-type(3) {
   width: 40%;
 }
-#storecont .list {
-  width: 800px;
+#storecont .header_wrap .list {
+  width: 1200px;
   display: flex;
   margin: 0 auto;
   color: #f5821f;
-  padding: 0 100px;
+  padding: 0 50px;
 }
-#storecont .list .line {
+#storecont .header_wrap .list .line {
   display: flex;
   width: 20%;
   line-height: 60px;
 }
-#storecont .list .line:nth-of-type(3) {
+#storecont .header_wrap .list .line:nth-of-type(3) {
   width: 40%;
 }
-#storecont .list:last-of-type {
+#storecont .header_wrap .list:last-of-type {
   margin-bottom: 120px;
 }
-#storecont .searchform1 {
+#storecont .header_wrap .searchform1 {
   width: 300px;
   margin: 0 auto;
   line-height: 50px;
 }
-#storecont .searchform1 > div {
+#storecont .header_wrap .searchform1 > div {
   color: #f5821f;
   font-size: 20px;
 }
-#storecont .searchform1 .city1 {
+#storecont .header_wrap .searchform1 .city1 {
   height: 50px;
   border: 1px solid #e4e4e4;
   color: #f5821f;
   width: 100px;
 }
-#storecont .searchform1 .city2 {
+#storecont .header_wrap .searchform1 .city2 {
   height: 50px;
   border: 1px solid #e4e4e4;
   color: #f5821f;
   width: 100px;
 }
-#storecont .searchform1 button {
+#storecont .header_wrap .searchform1 button {
   height: 50px;
   width: 80px;
   background: none;
@@ -878,21 +879,25 @@ body {
   position: relative;
   top: 2px;
 }
-#storecont .searchform2 {
+#storecont .header_wrap .searchform2 {
   width: 300px;
   margin: 0 auto;
   line-height: 50px;
 }
-#storecont .searchform2 > div {
+#storecont .header_wrap .searchform2 > div {
   color: #f5821f;
   font-size: 20px;
 }
-#storecont .searchform2 input {
+#storecont .header_wrap .searchform2 input {
   height: 50px;
+  line-height: 50px;
   border: 1px solid #e4e4e4;
   color: #f5821f;
+  text-indent: 10px;
+  position: relative;
+  top: -1px;
 }
-#storecont .searchform2 button {
+#storecont .header_wrap .searchform2 button {
   height: 50px;
   width: 80px;
   background: none;
@@ -921,7 +926,6 @@ body {
   #cont2 .left {
     height: 500px;
     width: 100%;
-    background-color: aqua;
     position: relative;
   }
   #cont2 .left .title {
@@ -1026,8 +1030,11 @@ body {
     margin: 20px;
   }
   #cont5 .cards .card img {
-    width: 200px;
-    height: 300px;
+    width: 300px;
+    height: 400px;
+  }
+  #cont5 .cards .card:last-of-type {
+    display: none;
   }
 }
 @media screen and (max-width: 820px) {

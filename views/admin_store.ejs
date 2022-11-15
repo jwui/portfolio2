@@ -1,4 +1,11 @@
-<!--로그인 확인기능 추가하기-->
+<!--로그인 확인기능 구간-->
+<% if(!userData) { %>
+<script>
+  alert("관리자만 접근할 수 있는 페이지입니다");
+  location.href = "/admin";
+</script>
+<% } %>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -27,8 +34,7 @@
         </div>
         <div class="line">
           <div>지역</div>
-          <div><%- storeData[i].sido %></div>
-          <div><%- storeData[i].sigugun %></div>
+          <div><%- storeData[i].sido + "\u00A0" + storeData[i].sigugun %></div>
         </div>
         <div class="line">
           <div>매장주소</div>
@@ -39,6 +45,7 @@
           <div><%- storeData[i].phone %></div>
         </div>
         <a href="/deletestore/<%- storeData[i].num %>">삭제</a>
+        <a href="/storeupt/<%- storeData[i].num %>">수정</a>
       </div>
       <% } %>
     </div>
