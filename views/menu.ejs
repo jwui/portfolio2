@@ -53,16 +53,17 @@
         <div class="listwrap">
           <% for(let i=0; i< prdData.length; i++) { %>
           <div class="list">
-            <img src="/upload/<%- prdData[i].thumbnail %>" />
             <a href="/menudetail/<%- prdData[i].num %>"
-              ><p><%- prdData[i].name %></p></a
-            >
+              ><img src="/upload/<%- prdData[i].thumbnail %>"
+            /></a>
+            <p><%- prdData[i].name %></p>
           </div>
           <% } %>
         </div>
       </div>
     </div>
     <%- include("common/footer.ejs") %>
+
     <script>
       let hamMenu = document.querySelector(".hamburger");
       let mobileMenu = document.querySelector("#header .header-mobileMenu");

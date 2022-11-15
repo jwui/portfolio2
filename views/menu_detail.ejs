@@ -61,9 +61,7 @@
             <a href="/menudetail/<%- prdData[i].num %>"
               ><img src="/upload/<%- prdData[i].thumbnail %>"
             /></a>
-            <a href="/menudetail/<%- prdData[i].num %>"
-              ><p><%- prdData[i].name %></p></a
-            >
+            <p><%- prdData[i].name %></p>
           </div>
           <% } %>
         </div>
@@ -71,11 +69,10 @@
     </div>
     <%- include("common/footer.ejs") %>
     <script>
-      let list = document.querySelectorAll("#menucont .listwrap a img");
-
+      let list = document.querySelectorAll(".list");
       list.forEach((item, index) => {
         item.addEventListener("click", () => {
-          console.log("clicked");
+          console.log(index);
         });
       });
     </script>
