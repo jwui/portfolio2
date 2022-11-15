@@ -152,8 +152,16 @@ app.get("/menu", (req, res) => {
 app.get("/menudetail/:no", (req, res) => {
   db.collection("port2_prdlist")
     .find({})
-    .toArray((err, result) => {
-      res.render("menu_detail", { prdData: result });
+    .toArray((err, result1) => {
+      db.collection("port2_prdlist").findOne(
+        { num: Number(req.params.no) },
+        (err, result2) => {
+          res.render("menu_detail", {
+            prdData: result1,
+            currentNum: result2.num,
+          });
+        }
+      );
     });
 });
 
@@ -162,7 +170,10 @@ app.get("/admin/storelist", (req, res) => {
   db.collection("port2_storelist")
     .find({})
     .toArray((err, result) => {
-      res.render("admin_store", { storeData: result, userData: req.user });
+      res.render("admin_store", {
+        storeData: result,
+        userData: req.user,
+      });
     });
 }); //admin_store.ejs 파일로 응답
 
