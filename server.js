@@ -113,27 +113,27 @@ app.get("/menu/coffee", (req, res) => {
     });
 });
 
-//쿠키 메뉴 페이지
-app.get("/menu/cookie", (req, res) => {
+//도넛 메뉴 페이지
+app.get("/menu/donuts", (req, res) => {
   db.collection("port2_prdlist")
-    .find({ category: "쿠키" })
+    .find({ category: "도넛" })
     .toArray((err, result) => {
       res.render("menu", { prdData: result });
     });
 });
-//케이크 메뉴 페이지
-app.get("/menu/cake", (req, res) => {
+//음료 메뉴 페이지
+app.get("/menu/beverage", (req, res) => {
   db.collection("port2_prdlist")
-    .find({ category: "케이크" })
+    .find({ category: "음료" })
     .toArray((err, result) => {
       res.render("menu", { prdData: result });
     });
 });
 
-//브레드 메뉴 페이지
-app.get("/menu/bread", (req, res) => {
+//샌드위치 메뉴 페이지
+app.get("/menu/sandwiches", (req, res) => {
   db.collection("port2_prdlist")
-    .find({ category: "브레드" })
+    .find({ category: "샌드위치" })
     .toArray((err, result) => {
       res.render("menu", { prdData: result });
     });
@@ -150,19 +150,16 @@ app.get("/menu", (req, res) => {
 
 //상품 상세페이지 get 요청
 app.get("/menudetail/:no", (req, res) => {
-  db.collection("port2_prdlist")
-    .find({})
-    .toArray((err, result1) => {
-      db.collection("port2_prdlist").findOne(
-        { num: Number(req.params.no) },
-        (err, result2) => {
-          res.render("menu_detail", {
-            prdData: result1,
-            currentNum: result2.num,
-          });
-        }
-      );
-    });
+  db.collection("port2_prdlist").findOne(
+    { num: Number(req.params.no) },
+    (err, result1) => {
+      db.collection("port2_prdlist")
+        .find({ category: result1.category })
+        .toArray((err, result2) => {
+          res.render("menu_detail", { currentNum: result1, prdData: result2 });
+        });
+    }
+  );
 });
 
 //관리자 매장등록 화면 페이지
@@ -330,6 +327,7 @@ app.post("/updateprd", upload.single("thumbfile"), function (req, res) {
         name: req.body.name,
         thumbnail: fileUpload,
         category: req.body.category,
+        detail: req.body.detail,
       },
     },
     //해당 게시글 상세화면 페이지로 이동
@@ -356,6 +354,7 @@ app.post("/add/prdlist", upload.single("thumbnail"), (req, res) => {
         name: req.body.name,
         thumbnail: fileTest,
         category: req.body.category,
+        detail: req.body.detail,
       },
       (err, result) => {
         db.collection("port2_count").updateOne(

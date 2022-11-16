@@ -37,6 +37,7 @@
         <h3><%- prdData[i].num %></h3>
         <p><%- prdData[i].name %></p>
         <p><%- prdData[i].category %></p>
+        <p><%- prdData[i].detail %></p>
         <img src="/upload/<%- prdData[i].thumbnail %>" />
         <a href="/delete/<%- prdData[i].num %>">삭제</a>
         <a href="/prdupt/<%- prdData[i].num %>">수정</a>
@@ -47,11 +48,12 @@
     <form action="/add/prdlist" method="post" enctype="multipart/form-data">
       <select name="category">
         <option value="커피">커피</option>
-        <option value="쿠키">쿠키</option>
-        <option value="케이크">케이크</option>
-        <option value="브레드">브레드</option>
+        <option value="도넛">도넛</option>
+        <option value="음료">음료</option>
+        <option value="샌드위치">샌드위치</option>
       </select>
-      <input type="text" name="name" />
+      <input type="text" name="name" placeholder="제목" />
+      <input type="text" name="detail" placeholder="내용" />
       <input type="file" name="thumbnail" />
       <button type="submit">상품등록</button>
     </form>

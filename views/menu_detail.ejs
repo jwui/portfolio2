@@ -42,18 +42,22 @@
     <%- include("common/header.ejs") %>
     <div id="detailcont">
       <div class="center">
-        <img src="/upload/<%- prdData[1].thumbnail %>" />
+        <img src="/upload/<%- currentNum.thumbnail %>" />
+        <div class="context">
+        <h2><%- currentNum.name %></h2>
+        <p><%- currentNum.detail %></p>
+      </div>
       </div>
     </div>
     <div id="menucont">
       <div class="center">
         <div class="title">MENU</div>
         <ul class="select">
-          <li><a href="/menu/coffee">커피</a></li>
-          <li><a href="/menu/cookie">쿠키</a></li>
-          <li><a href="/menu/cake">케이크</a></li>
-          <li><a href="/menu/bread">브레드</a></li>
-          <li><a href="/menu">전체</a></li>
+          <li class="<%- currentNum.category == "커피" ? "on" : null %>"><a href="/menu/coffee">커피</a></li>
+          <li class="<%- currentNum.category == "도넛" ? "on" : null %>"><a href="/menu/donuts">도넛</a></li>
+          <li class="<%- currentNum.category == "음료" ? "on" : null %>"><a href="/menu/beverage">음료</a></li>
+          <li class="<%- currentNum.category == "샌드위치" ? "on" : null %>"><a href="/menu/sandwiches">샌드위치</a></li>
+          <li ><a href="/menu">전체</a></li>
         </ul>
         <div class="listwrap">
           <% for(let i = 0; i < prdData.length; i++) { %>
@@ -69,10 +73,11 @@
     </div>
     <%- include("common/footer.ejs") %>
     <script>
-      let list = document.querySelectorAll(".list");
+      let list = document.querySelectorAll(".listwrap .list img");
+      console.log(list);
       list.forEach((item, index) => {
         item.addEventListener("click", () => {
-          console.log(index);
+          console.log(item);
         });
       });
     </script>
