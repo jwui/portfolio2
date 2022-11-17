@@ -41,25 +41,30 @@
       * {
         margin: 0;
         padding: 0;
-      }depth2
-      img {
+      }
+
+      depth2 img {
         vertical-align: middle;
       }
+
       .cont1 {
         padding: 100px 0;
         display: flex;
         justify-content: center;
       }
+
       .ca_wrap {
         width: 80%;
         position: relative;
         overflow: hidden;
       }
+
       .ca_wrap h2 {
         color: #ff6d0d;
         margin: 60px;
         font-size: 48px;
       }
+
       .ca_wrap h2::after {
         content: "";
         background-color: #ff6d0d;
@@ -67,15 +72,18 @@
         width: 100%;
         display: block;
       }
+
       .ca_move {
         width: 200%;
         display: flex;
       }
+
       .ca_move .ca_child {
         width: 12.5%;
         box-sizing: border-box;
         padding: 0 1%;
       }
+
       .ca_move .ca_child img {
         width: 100%;
         height: 400px;
@@ -85,10 +93,12 @@
         opacity: 0.8;
         object-fit: cover;
       }
+
       .ca_move .ca_child img:hover {
         scale: 1.05;
         opacity: 1;
       }
+
       .ca_prev {
         position: absolute;
         bottom: 50%;
@@ -106,11 +116,13 @@
         color: #ff6d0d;
         font-size: 48px;
       }
+
       .ca_child {
         color: #ff6d0d;
         text-align: center;
         font-weight: bold;
       }
+
       .ca_child p {
         margin: 40px 0;
         line-height: 1.5;
@@ -120,6 +132,7 @@
         .ca_wrap {
           width: 80%;
         }
+
         .ca_move {
           width: 266.666666%;
         }
@@ -129,20 +142,24 @@
         .ca_wrap {
           width: 90%;
         }
+
         .ca_move {
           width: 400%;
         }
       }
+
       @media screen and (max-width: 768px) {
         .ca_wrap {
           width: 70%;
         }
+
         .ca_move {
           width: 800%;
         }
       }
     </style>
   </head>
+
   <body>
     <%- include("common/header.ejs") %>
     <div id="container">
@@ -263,6 +280,18 @@
 
       //prev 클릭시 캐러셀 이동후 순서 교체후 원위치 시키는 작업까지
       prevBtn.addEventListener("click", () => {
+        prevMove();
+      });
+
+      //3초마다 한번씩 오른쪽으로 이동하는 구간
+      setInterval(nextMove, 5000);
+
+      //  next 클릭시 캐러셀 이동후 순서 교체후 원위치 시키는 작업까지
+      nextBtn.addEventListener("click", () => {
+        nextMove();
+      });
+
+      function prevMove() {
         ca_move.style.transition = "all 0.5s";
         ca_move.style.marginLeft = prevChangeMargin;
         // prevBtn.style.display = "none";
@@ -278,9 +307,9 @@
           //   prevBtn.style.display = "block";
           //   nextBtn.style.display = "block";
         }, 500);
-      });
-      //next 클릭시 캐러셀 이동후 순서 교체후 원위치 시키는 작업까지
-      nextBtn.addEventListener("click", () => {
+      }
+
+      function nextMove() {
         ca_move.style.transition = "all 0.5s";
         ca_move.style.marginLeft = "0%";
         // prevBtn.style.display = "none";
@@ -296,7 +325,7 @@
           //   prevBtn.style.display = "block";
           //   nextBtn.style.display = "block";
         }, 500);
-      });
+      }
     </script>
   </body>
 </html>

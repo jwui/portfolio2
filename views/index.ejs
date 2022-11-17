@@ -40,12 +40,15 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   </head>
+
   <body>
     <%- include("common/header.ejs") %>
     <div id="cont1">
       <div class="swiper mySwiper">
         <div class="swiper-wrapper">
-          <div class="swiper-slide"><h2>잠깐의 여유와 달콤한 행복</h2></div>
+          <div class="swiper-slide">
+            <h2>잠깐의 여유와 달콤한 행복</h2>
+          </div>
           <div class="swiper-slide">
             <h2>던킨도너츠와 함께하는 달콤한 휴식</h2>
           </div>
@@ -59,7 +62,7 @@
       </div>
     </div>
     <div id="cont2">
-      <div class="left">
+      <div class="left" data-aos="fade-right">
         <div class="title">D&D MENU</div>
         <ul class="menu">
           <li><a href="#">SIGNATURE</a></li>
@@ -68,7 +71,7 @@
           <li><a href="#">BEVERAGE</a></li>
         </ul>
       </div>
-      <div class="right">
+      <div class="right" data-aos="fade-left">
         <div class="contents">
           <div class="title">SIGNATURE</div>
           <div class="context">
@@ -231,10 +234,10 @@
           <span>PACK</span>
         </div>
         <div class="btn">
-          <a href="#">자세히 보기</a>
+          <a href="/donation">자세히 보기</a>
         </div>
       </div>
-      <div class="right"></div>
+      <div class="right" data-aos="fade-left" data-aos-delay="200"></div>
     </div>
     <div id="cont5">
       <div class="circleEffect">
@@ -248,17 +251,35 @@
       </div>
       <div class="cards">
         <div class="card card1" data-aos="fade-up">
-          <img src="img/cont5-1.jpg" />
+          <a href="#"><img src="img/cont5-1.jpg" /></a>
         </div>
         <div class="card card2" data-aos="fade-up" data-aos-delay="100">
-          <img src="img/cont5-2.jpg" />
+          <a href="#"><img src="img/cont5-2.jpg" /></a>
         </div>
         <div class="card card3" data-aos="fade-up" data-aos-delay="200">
-          <img src="img/cont5-3.jpg" />
+          <a href="#"><img src="img/cont5-3.jpg" /></a>
         </div>
       </div>
     </div>
     <%- include("common/footer.ejs") %>
+    <script>
+      let cont4Right = document.querySelector("#cont4 .right");
+      let i = 0;
+      function autoMove() {
+        i++;
+        if (i == 2) {
+          i = 0;
+        }
+        if (i == 0) {
+          cont4Right.style.backgroundImage = "url('img/cont4bg.jpg')";
+        }
+        if (i == 1) {
+          cont4Right.style.backgroundImage = "url('img/cont4bg2.jpg')";
+        }
+        console.log(i);
+      }
+      setInterval(autoMove, 3000);
+    </script>
     <script>
       var options = {
         enableScrollSpy: true,

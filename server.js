@@ -40,6 +40,14 @@ app.get("/", function (req, res) {
   res.render("index", { userData: req.user }); //로그인시 회원정보데이터 ejs 파일로 전달
 });
 
+app.get("/", function (req, res) {
+  res.render("index", { userData: req.user }); //로그인시 회원정보데이터 ejs 파일로 전달
+});
+
+app.get("/donation", function (req, res) {
+  res.render("donation"); //로그인시 회원정보데이터 ejs 파일로 전달
+});
+
 //  /loginresult 경로 요청시 passport.autenticate() 함수구간이 아이디 비번 로그인 검증구간
 passport.use(
   new LocalStrategy(

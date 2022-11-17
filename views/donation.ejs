@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>브랜드 스토리</title>
+    <title>기부페이지</title>
     <link href="/css/styles.css" rel="stylesheet" />
     <link
       rel="stylesheet"
@@ -42,75 +42,63 @@
   </head>
   <body>
     <%- include("common/header.ejs") %>
-    <div id="storycont">
+    <div id="donationcont">
       <div class="cont1">
-        <div
-          class="left"
-          h1
-          data-aos="fade-right"
-          data-aos-duration="500"
-        ></div>
-        <div class="right">
-          <h1 data-aos="zoom-in-left" data-aos-duration="500">BRAND STORY</h1>
-          <h2 data-aos="zoom-in-left" data-aos-duration="500">
-            DUNKIN DONUTS<br />
-            MY DONUT, MY TABLE
-          </h2>
-          <p data-aos="zoom-in-left" data-aos-duration="500">
-            신선한 도넛과 매일 구워내는 쿠키, <br />
-            오늘의 나, 오늘의 우리 보여주는 곳.
-          </p>
-          <p data-aos="zoom-in-left" data-aos-duration="500">
-            원두에서 공간까지,<br />
-            나만의 취향을 발견할 수 있도록,<br />
-            당신의 일상속에 영감을 제시합니다.
-          </p>
-          <p data-aos="fade-in" data-aos-duration="500">
-            여기 우리의 테이블 위에
-          </p>
+        <div class="left">
+          <div class="context">
+            <span>도넛 한 개</span>로 맛있는 세상 만들기<br />
+            <span>Enjoy your donuts,</span> Brilliant Life
+          </div>
         </div>
+        <div class="right"><img src="img/donationbg.jpg" /></div>
       </div>
       <div class="cont2">
-        <div class="left" data-aos="fade-right" data-aos-duration="500"></div>
-        <div class="right">
-          <h1 data-aos="zoom-in-left" data-aos-duration="500">BRAND SLOGAN</h1>
-          <h2 data-aos="zoom-in-left" data-aos-duration="500">
-            SELECT YOUR MODE & MOOD
-          </h2>
-          <p data-aos="zoom-in-left" data-aos-duration="500">
-            당신의 시간은 어떤가요? <br />
-            오롯이 나를 위한 시간, 내가 사랑하는 사람들과 함께 할 수 있는 시간을
-            얼마나 가지고 있나요?
-          </p>
-          <p data-aos="zoom-in-left" data-aos-duration="500">
-            우리의 인생은 다시 돌려볼 수 있는 영화가 아니기에, 각자의 mode와
-            mood로 오롯이 나를 위한 시간을 마주해야 합니다.
-          </p>
-          <p data-aos="fade-in" data-aos-duration="500">
-            오늘 당신이 선택한 도넛은 어떤 맛인가요? 그리고 오늘 당신의 기분,
-            컨디션은 어떤가요? 내가 셀렉하는 오늘의 즐거움, 던킨도너츠입니다.
-          </p>
+        <div class="imgcont">
+          <img src="img/oneforone.png" />
         </div>
-      </div>
-      <div class="cont3">
-        <iframe
-          width="70%"
-          height="70%"
-          src="https://youtube.com/embed/zWwEM4_rDfA"
-        >
-        </iframe>
+        <div class="bot">
+          <div class="left">
+            <h2>ONE-FOR-ONE 도넛 한 개로 맛있는 세상 만들기</h2>
+            <p>
+              2016년부터 지금까지 달려온 걸음. 던킨도너츠에서는 도넛 한 개로
+              기부가 됩니다.
+            </p>
+            <p>
+              ‘원포원(ONE-FOR-ONE) 캠페인’은 우리 사회에 더 이상 소외 받는
+              아이들이 없도록 던킨도너츠에서 ‘도넛’와 ‘기부’를 함께 즐기세요. 참
+              쉬운 기부로 사랑을 나눠주세요!
+            </p>
+            <p>던킨도너츠 ONE-FOR-ONE 캠페인은 굿 네이버스와 함께합니다.</p>
+          </div>
+          <div class="right">
+            <div class="countbox">
+              <p>결식아동에게 기부된 우유</p>
+              <h2 id="counter1">0</h2>
+              <span>PACK</span>
+            </div>
+          </div>
+        </div>
+        <div class="searchBtn"><a href="store">가까운매장 찾기</a></div>
       </div>
     </div>
     <%- include("common/footer.ejs") %>
+    <script>
+      var options = {
+        enableScrollSpy: true,
+        useEasing: true,
+        scrollSpyOnce: true,
+      };
+      var counter = new countUp.CountUp("counter1", 276422, options);
+    </script>
     <script>
       let hamMenu = document.querySelector(".hamburger");
       let mobileMenu = document.querySelector("#header .header-mobileMenu");
       hamMenu.addEventListener("click", () => {
         hamMenu.classList.toggle("is-active");
-        if (!hamMenu.classList.contains("is-active")) {
-          mobileMenu.style.right = "-320px";
-        } else {
+        if (hamMenu.classList.contains("is-active")) {
           mobileMenu.style.right = "0px";
+        } else {
+          mobileMenu.style.right = "-320px";
         }
       });
 

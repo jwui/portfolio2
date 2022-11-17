@@ -1,124 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>메뉴 상세페이지</title>
-    <link href="/css/styles.css" rel="stylesheet" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Dongle:wght@300;400;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.3.2/countUp.umd.min.js"
-      integrity="sha512-Be9XaN4NvN8CVmbk4juf7JX2/87a7I37CX1WV37w+jyav4exBHDqHzmjs+Tbx7Dt2j9vpULDZNxcP0sZP03/WQ=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/hamburgers/1.2.1/hamburgers.min.css"
-      integrity="sha512-+mlclc5Q/eHs49oIOCxnnENudJWuNqX5AogCiqRBgKnpoplPzETg2fkgBFVC6WYUVxYYljuxPNG8RE7yBy1K+g=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-  </head>
-  <body>
-    <%- include("common/header.ejs") %>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>메뉴 상세페이지</title>
+  <link href="/css/styles.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Dongle:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.3.2/countUp.umd.min.js"
+    integrity="sha512-Be9XaN4NvN8CVmbk4juf7JX2/87a7I37CX1WV37w+jyav4exBHDqHzmjs+Tbx7Dt2j9vpULDZNxcP0sZP03/WQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hamburgers/1.2.1/hamburgers.min.css"
+    integrity="sha512-+mlclc5Q/eHs49oIOCxnnENudJWuNqX5AogCiqRBgKnpoplPzETg2fkgBFVC6WYUVxYYljuxPNG8RE7yBy1K+g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+  <%- include("common/header.ejs") %>
     <div id="detailcont">
       <div class="center">
         <img src="/upload/<%- currentNum.thumbnail %>" />
         <div class="context">
-        <h2><%- currentNum.name %></h2>
-        <p><%- currentNum.detail %></p>
-      </div>
+          <div class="btns">
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+          </div>
+          <h2>
+            <%- currentNum.name %>
+          </h2>
+          <p>
+            <%- currentNum.detail %>
+          </p>
+        </div>
       </div>
     </div>
     <div id="menucont">
       <div class="center">
         <div class="title">MENU</div>
         <ul class="select">
-          <li class="<%- currentNum.category == "커피" ? "on" : null %>"><a href="/menu/coffee">커피</a></li>
-          <li class="<%- currentNum.category == "도넛" ? "on" : null %>"><a href="/menu/donuts">도넛</a></li>
-          <li class="<%- currentNum.category == "음료" ? "on" : null %>"><a href="/menu/beverage">음료</a></li>
-          <li class="<%- currentNum.category == "샌드위치" ? "on" : null %>"><a href="/menu/sandwiches">샌드위치</a></li>
-          <li ><a href="/menu">전체</a></li>
+          <li class="<%- currentNum.category == " 커피" ? "on" : null %>"><a href="/menu/coffee">커피</a></li>
+          <li class="<%- currentNum.category == " 도넛" ? "on" : null %>"><a href="/menu/donuts">도넛</a></li>
+          <li class="<%- currentNum.category == " 음료" ? "on" : null %>"><a href="/menu/beverage">음료</a></li>
+          <li class="<%- currentNum.category == " 샌드위치" ? "on" : null %>"><a href="/menu/sandwiches">샌드위치</a></li>
+          <li><a href="/menu">전체</a></li>
         </ul>
         <div class="listwrap">
-          <% for(let i = 0; i < prdData.length; i++) { %>
-          <div class="list">
-            <a href="/menudetail/<%- prdData[i].num %>"
-              ><img src="/upload/<%- prdData[i].thumbnail %>"
-            /></a>
-            <p><%- prdData[i].name %></p>
-          </div>
-          <% } %>
+          <% for(let i=0; i < prdData.length; i++) { %>
+            <div class="list">
+              <a href="/menudetail/<%- prdData[i].num %>"><img src="/upload/<%- prdData[i].thumbnail %>" /></a>
+              <p>
+                <%- prdData[i].name %>
+              </p>
+            </div>
+            <% } %>
         </div>
       </div>
     </div>
     <%- include("common/footer.ejs") %>
-    <script>
-      let list = document.querySelectorAll(".listwrap .list img");
-      console.log(list);
-      list.forEach((item, index) => {
-        item.addEventListener("click", () => {
-          console.log(item);
-        });
-      });
-    </script>
-    <script>
-      let hamMenu = document.querySelector(".hamburger");
-      let mobileMenu = document.querySelector("#header .header-mobileMenu");
-      hamMenu.addEventListener("click", () => {
-        hamMenu.classList.toggle("is-active");
-        if (!hamMenu.classList.contains("is-active")) {
-          mobileMenu.style.right = "-320px";
-        } else {
-          mobileMenu.style.right = "0px";
-        }
-      });
-
-      let clickBtn = document.querySelectorAll(
-        "#header .header-mobileMenu .navMenu .menuList ul .menu"
-      );
-      let depth2 = document.querySelectorAll(
-        "#header .header-mobileMenu .navMenu .menuList ul li .depth2"
-      );
-      clickBtn.forEach((item, index) => {
-        item.addEventListener("click", () => {
-          depth2.forEach((item, index) => {
-            item.classList.remove("on");
+      <script>
+        let list = document.querySelectorAll(".listwrap .list img");
+        console.log(list);
+        list.forEach((item, index) => {
+          item.addEventListener("click", () => {
+            console.log(item);
           });
-          depth2[index].classList.add("on");
         });
-      });
+      </script>
+      <script>
+        let hamMenu = document.querySelector(".hamburger");
+        let mobileMenu = document.querySelector("#header .header-mobileMenu");
+        hamMenu.addEventListener("click", () => {
+          hamMenu.classList.toggle("is-active");
+          if (!hamMenu.classList.contains("is-active")) {
+            mobileMenu.style.right = "-320px";
+          } else {
+            mobileMenu.style.right = "0px";
+          }
+        });
 
-      //현재 접속한 url 주소값 가져오기
-      let currentPath = window.location.pathname;
+        let clickBtn = document.querySelectorAll(
+          "#header .header-mobileMenu .navMenu .menuList ul .menu"
+        );
+        let depth2 = document.querySelectorAll(
+          "#header .header-mobileMenu .navMenu .menuList ul li .depth2"
+        );
+        clickBtn.forEach((item, index) => {
+          item.addEventListener("click", () => {
+            depth2.forEach((item, index) => {
+              item.classList.remove("on");
+            });
+            depth2[index].classList.add("on");
+          });
+        });
 
-      const selectMenu = document.querySelectorAll(".select li");
+        //현재 접속한 url 주소값 가져오기
+        let currentPath = window.location.pathname;
 
-      selectMenu.forEach((item, index) => {
-        let selMenuChild = item.querySelector("a").getAttribute("href");
-        if (currentPath === selMenuChild) {
-          item.classList.add("on");
-        }
-      });
-    </script>
-  </body>
+        const selectMenu = document.querySelectorAll(".select li");
+
+        selectMenu.forEach((item, index) => {
+          let selMenuChild = item.querySelector("a").getAttribute("href");
+          if (currentPath === selMenuChild) {
+            item.classList.add("on");
+          }
+        });
+      </script>
+</body>
+
 </html>
