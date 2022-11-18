@@ -439,3 +439,51 @@ app.get("/search/storename", (req, res) => {
     res.redirect("/store");
   }
 });
+
+app.get("/newsboard", async (req, res) => {
+  //사용자가 게시판에 접속시 몇번 페이징 번호로 접속했는지 확인
+  let pageNum = req.query.page == null ? 1 : Number(req.query.page);
+  //한 페이지당 보여줄 데이터 갯수
+  let perPage = 2;
+  //블록당 보여줄 페이징 번호 갯수
+  let blockCount = 3;
+  //현재 페이지 블록 구하는 구간
+  let blockNum = Math.ceil(pageNum / blockCount);
+  //블록안에 있는 페이징의 시작번호 값
+  let blockStart = (blockNum - 1) * blockCount + 1;
+  //블록안에 있는 페이징의 끝번호 값
+  let blockEnd = blockStart + blockCount - 1;
+  //데이터베이스 콜렉션에 있는 전체 객체의 갯수값 가져오는 명령어
+  let totalData = await db.collection("port2_newsboard").countDocuments({});
+  console.log(totalData);
+  //전체 데이터값을 통해서 전체 페이징 번호를 계산
+  let paging = Math.ceil(totalData / perPage);
+  //블록에서 마지막 번호가 페이징의 끝번호보다 크다면, 페이징의 끝번호를 강제로 부여
+  if (blockEnd > paging) {
+    blockEnd = paging;
+  }
+
+  //블록의 총 갯수 계산
+  let totalBlock = Math.ceil(paging / blockCount);
+  //데이터베이스에서 꺼내오는 데이터의 순번값을 결정
+  //데이터베이스 콜렉션에서 데이터를 perPage 갯수만큼 맞춰서 가져오기
+  let startFrom = (pageNum - 1) * perPage;
+  //sort({정렬할 프로퍼티명:1}) 오름차순 -1은 내림차순
+  //조건문을 이용해서 입력한 검색어가 있는 경우는 aggregate({}).sort().skip().limit()
+  db.collection("port2_newsboard")
+    .find({})
+    .sort({ number: -1 })
+    .skip(startFrom)
+    .limit(perPage)
+    .toArray((err, result) => {
+      res.render("newsbrd", {
+        newsData: result,
+        paging: paging,
+        pageNum: pageNum,
+        blockStart: blockStart,
+        blockEnd: blockEnd,
+        blockNum: blockNum,
+        totalBlock: totalBlock,
+      });
+    });
+});

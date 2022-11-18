@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>게시판 페이지</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      ul,
+      ol,
+      li {
+        list-style: none;
+      }
+      .paging {
+        display: flex;
+      }
+      .paging li {
+        margin: 0 15px;
+      }
+      .paging li a {
+        color: #000;
+      }
+      .paging li.highlight a {
+        color: red;
+      }
+      .table-wrapper {
+        width: 1200px;
+        margin: 0 auto;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        background: #f7f6f3;
+        padding: 25px;
+        transition: 0.3s ease;
+        padding-bottom: 0px;
+        margin-bottom: 0px;
+      }
+      .table-wrapper .info {
+        color: #ff6d0d;
+        font-size: 24px;
+        font-weight: 500;
+        margin-bottom: 25px;
+        display: flex;
+        justify-content: space-between;
+      }
+      .table-wrapper .info i {
+        position: relative;
+        top: 5px;
+      }
+      .table-wrapper .context {
+        margin-bottom: 25px;
+        border-bottom: 1px solid #ff6d0d;
+        padding-bottom: 25px;
+        width: 1200px;
+        line-height: 1.5;
+        color: #ff6d0d;
+        opacity: 0;
+        transition: all 0.3s;
+      }
+      .table-wrapper .context.on {
+        opacity: 1;
+      }
+      .table-wrapper .context:last-of-type {
+        margin-bottom: 0;
+        border: none;
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <!--데이터를 보여주는 구간-->
+    <div class="table-wrapper">
+      <% for (let i = 0; i < newsData.length; i++) { %>
+      <h2 class="info">
+        <%- newsData[i].title %><i class="fa-solid fa-arrow-down"></i>
+      </h2>
+      <p class="context"><%- newsData[i].context %></p>
+      <% } %>
+    </div>
+    <!--페이징 번호 생성된 구간 처음 이전 1,2,3 다음 마지막-->
+    <ul class="paging">
+      <% if(pageNum <= 1) { %>
+      <li>처음</li>
+      <% } else { %>
+      <!--/boardtest?page=1-->
+      <li><a href="?page=1">처음</a></li>
+      <% } %> <% if(blockStart > totalBlock) { %>
+      <li><a href="?page=<%- blockStart - 1 %>">이전</a></li>
+      <% } %> <% for(let i = blockStart; i <= blockEnd; i++) { %> <% if (pageNum
+      == i) { %>
+      <li class="highlight"><a href="?page=<%- i %>"><%- i %></a></li>
+      <% } else { %>
+      <li><a href="?page=<%- i %>"><%- i %></a></li>
+      <% } %> <% } %> <% if(blockNum < totalBlock) { %>
+      <li><a href="?page=<%- blockEnd + 1 %>">다음</a></li>
+      <% } %> <% if(pageNum >= paging) { %>
+      <li>마지막</li>
+      <% } else { %>
+      <li><a href="?page=<%- paging %>">마지막</a></li>
+      <% } %>
+    </ul>
+
+    <script>
+      let title = document.querySelectorAll(".table-wrapper .info");
+      let context = document.querySelectorAll(".table-wrapper .context");
+
+      title.forEach((item, index) => {
+        item.addEventListener("click", () => {
+          context[index].classList.toggle("on");
+          let test = item.nextElementSibling.offsetHeight;
+          console.log(test);
+        });
+      });
+    </script>
+  </body>
+</html>
