@@ -60,6 +60,7 @@
         color: #ff6d0d;
         opacity: 0;
         transition: all 0.3s;
+        height: 0px;
       }
       .table-wrapper .context.on {
         opacity: 1;
@@ -81,10 +82,12 @@
     <!--데이터를 보여주는 구간-->
     <div class="table-wrapper">
       <% for (let i = 0; i < newsData.length; i++) { %>
-      <h2 class="info">
-        <%- newsData[i].title %><i class="fa-solid fa-arrow-down"></i>
-      </h2>
-      <p class="context"><%- newsData[i].context %></p>
+      <div class="cont-wrapper">
+        <h2 class="info">
+          <%- newsData[i].title %><i class="fa-solid fa-arrow-down"></i>
+        </h2>
+        <p class="context"><%- newsData[i].context %></p>
+      </div>
       <% } %>
     </div>
     <!--페이징 번호 생성된 구간 처음 이전 1,2,3 다음 마지막-->
@@ -116,9 +119,12 @@
 
       title.forEach((item, index) => {
         item.addEventListener("click", () => {
-          context[index].classList.toggle("on");
           let test = item.nextElementSibling.offsetHeight;
-          console.log(test);
+          if (context[index].classList.toggle("on")) {
+            context[index].style.height = test + "px";
+          } else {
+            context[index].style.height = 0 + "px";
+          }
         });
       });
     </script>

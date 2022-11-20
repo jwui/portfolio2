@@ -455,7 +455,6 @@ app.get("/newsboard", async (req, res) => {
   let blockEnd = blockStart + blockCount - 1;
   //데이터베이스 콜렉션에 있는 전체 객체의 갯수값 가져오는 명령어
   let totalData = await db.collection("port2_newsboard").countDocuments({});
-  console.log(totalData);
   //전체 데이터값을 통해서 전체 페이징 번호를 계산
   let paging = Math.ceil(totalData / perPage);
   //블록에서 마지막 번호가 페이징의 끝번호보다 크다면, 페이징의 끝번호를 강제로 부여
