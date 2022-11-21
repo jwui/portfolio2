@@ -49,6 +49,7 @@ table {
 body {
   line-height: 1;
   font-family: "IBM Plex Sans KR", sans-serif;
+  overflow-x: hidden;
 }
 .clear_fix::after {
   content: "";
@@ -127,6 +128,7 @@ body {
           opacity: 1;
         }
       }
+
       .searchBtn {
         margin-left: 30px;
         margin-top: 30px;
@@ -141,11 +143,26 @@ body {
     }
   }
   .header-top {
+    .adminpage {
+      z-index: 100;
+      line-height: 102px;
+      i {
+        font-size: 24px;
+        color: #ff6d0d;
+        opacity: 0.8;
+        transition: all 0.3s;
+        margin-bottom: 30px;
+        &:hover {
+          scale: 1.2;
+          opacity: 1;
+        }
+      }
+    }
     z-index: 10;
     width: 100%;
     display: flex;
     position: fixed;
-    justify-content: space-evenly;
+    justify-content: center;
     background-color: #fff;
     .hamburgerbtn {
       position: absolute;
@@ -201,7 +218,7 @@ body {
         &:hover {
           .depth2 {
             display: block;
-            height: 204px;
+            height: 208px;
             li {
               display: block;
               box-shadow: inset 0 0 0 0 #e11383;
@@ -343,6 +360,9 @@ body {
             height: 2px;
             background-color: #fff;
           }
+        }
+        a:hover {
+          font-size: 28px;
         }
       }
     }
@@ -1151,8 +1171,16 @@ $animationSpeed: 40s;
     }
   }
 }
+@media screen and (max-width: 1366px) {
+  .adminpage {
+    display: none;
+  }
+}
 
 @media screen and (max-width: 1300px) {
+  .adminpage {
+    display: none;
+  }
   #donationcont {
     .cont1 {
       flex-direction: column;
@@ -1228,6 +1256,9 @@ $animationSpeed: 40s;
       height: 500px;
       width: 100%;
       position: relative;
+      .menu li a:hover {
+        font-size: 28px;
+      }
       .title {
         text-align: center;
         padding-top: 60px;
@@ -1347,6 +1378,11 @@ $animationSpeed: 40s;
 
 @media screen and (max-width: 930px) {
   #cont2 {
+    .left {
+      .menu li a:hover {
+        font-size: 28px;
+      }
+    }
     .right {
       .contents {
         .title {

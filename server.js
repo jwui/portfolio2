@@ -377,6 +377,98 @@ app.post("/add/prdlist", upload.single("thumbnail"), (req, res) => {
   });
 });
 
+//관리자 뉴스등록 페이지
+app.get("/admin/newslist", (req, res) => {
+  //db에 저장되어있는 상품목록들 find 찾아와서 전달
+  db.collection("port2_newsboard")
+    .find({})
+    .toArray((err, result) => {
+      res.render("admin_newslist", { newsData: result, userData: req.user });
+    });
+});
+
+//뉴스 삭제처리 get 요청
+app.get("/deletenews/:no", function (req, res) {
+  //db안에 해당 게시글 번호에 맞는 데이터만 삭제 처리
+  db.collection("port2_newsboard").deleteOne(
+    { number: Number(req.params.no) },
+    function (err, result) {
+      //게시글 목록페이지로 이동
+      res.redirect("/admin/newslist");
+    }
+  );
+});
+
+//뉴스 수정화면 페이지 get 요청
+app.get("/newsupt/:no", function (req, res) {
+  //db안에 해당 게시글번호에 맞는 데이터를 꺼내오고 ejs파일로 응답
+  db.collection("port2_newsboard").findOne(
+    { number: Number(req.params.no) },
+    function (err, result) {
+      res.render("newsupt", {
+        newsData: result,
+        userData: req.user,
+      });
+    }
+  );
+  //input, textarea에다가 작성내용 미리 보여줌
+});
+
+app.post("/updatenews", upload.single("thumbfile"), function (req, res) {
+  //db에 해당 게시글 번호에 맞는 게시글 수정처리
+  if (req.file) {
+    fileUpload = req.file.originalname;
+  } else {
+    fileUpload = req.body.fileOrigin;
+  }
+
+  db.collection("port2_newsboard").updateOne(
+    { number: Number(req.body.num) },
+    {
+      $set: {
+        title: req.body.title,
+        thumbnail: fileUpload,
+        context: req.body.context,
+      },
+    },
+    //해당 게시글 상세화면 페이지로 이동
+    function (err, result) {
+      res.redirect("/admin/newslist");
+    }
+  );
+});
+
+//뉴스를 DB에 넣는 경로 //첨부한 이미지 name값
+app.post("/add/newslist", upload.single("thumbnail"), (req, res) => {
+  //파일첨부가 있을 때
+  if (req.file) {
+    fileTest = req.file.originalname;
+  }
+  //파일첨부가 없을 때
+  else {
+    fileTest = null;
+  }
+  db.collection("port2_count").findOne({ name: "뉴스등록" }, (err, result1) => {
+    db.collection("port2_newsboard").insertOne(
+      {
+        number: result1.newsCount + 1,
+        title: req.body.title,
+        context: req.body.context,
+        thumbnail: fileTest,
+      },
+      (err, result) => {
+        db.collection("port2_count").updateOne(
+          { name: "뉴스등록" },
+          { $inc: { newsCount: 1 } },
+          (err, result) => {
+            res.redirect("/admin/newslist"); //상품등록 페이지로 이동
+          }
+        );
+      }
+    );
+  });
+});
+
 //매장 검색 화면 페이지(사용자)
 app.get("/store", (req, res) => {
   db.collection("port2_storelist")
@@ -444,7 +536,7 @@ app.get("/newsboard", async (req, res) => {
   //사용자가 게시판에 접속시 몇번 페이징 번호로 접속했는지 확인
   let pageNum = req.query.page == null ? 1 : Number(req.query.page);
   //한 페이지당 보여줄 데이터 갯수
-  let perPage = 2;
+  let perPage = 5;
   //블록당 보여줄 페이징 번호 갯수
   let blockCount = 3;
   //현재 페이지 블록 구하는 구간

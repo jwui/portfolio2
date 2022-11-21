@@ -12,7 +12,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>관리자 상품등록 페이지</title>
+    <title>관리자 뉴스등록 페이지</title>
     <style>
       .prdwrap .list {
         border: 1px solid #000;
@@ -32,31 +32,24 @@
       <li><a href="/admin/newslist">뉴스등록페이지</a></li>
     </ul>
     <!--등록된 상품목록 전부다 보여주는 구간-->
-    <div class="prdwrap">
-      <% for(let i=0; i < prdData.length; i++) {%>
+    <div class="newswrap">
+      <% for(let i = 0; i < newsData.length; i++) {%>
       <div class="list">
-        <h3><%- prdData[i].num %></h3>
-        <p><%- prdData[i].name %></p>
-        <p><%- prdData[i].category %></p>
-        <p><%- prdData[i].detail %></p>
-        <img src="/upload/<%- prdData[i].thumbnail %>" />
-        <a href="/delete/<%- prdData[i].num %>">삭제</a>
-        <a href="/prdupt/<%- prdData[i].num %>">수정</a>
+        <h3><%- newsData[i].number %></h3>
+        <p><%- newsData[i].title %></p>
+        <p><%- newsData[i].context %></p>
+        <img src="/upload/<%- newsData[i].thumbnail %>" />
+        <a href="/deletenews/<%- newsData[i].number %>">삭제</a>
+        <a href="/newsupt/<%- newsData[i].number %>">수정</a>
       </div>
       <% } %>
     </div>
-    <!--상품을 등록하는 form태그 구간-->
-    <form action="/add/prdlist" method="post" enctype="multipart/form-data">
-      <select name="category">
-        <option value="커피">커피</option>
-        <option value="도넛">도넛</option>
-        <option value="음료">음료</option>
-        <option value="샌드위치">샌드위치</option>
-      </select>
-      <input type="text" name="name" placeholder="제목" />
-      <input type="text" name="detail" placeholder="내용" />
+    <!--뉴스를 등록하는 form태그 구간-->
+    <form action="/add/newslist" method="post" enctype="multipart/form-data">
+      <input type="text" name="title" placeholder="제목" />
+      <input type="text" name="context" placeholder="내용" />
       <input type="file" name="thumbnail" />
-      <button type="submit">상품등록</button>
+      <button type="submit">뉴스등록</button>
     </form>
   </body>
 </html>

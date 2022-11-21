@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>뉴스 수정페이지</title>
+  </head>
+  <body>
+    <div id="newsupt_container">
+      <div class="newsupt">
+        <div class="title">상품 수정페이지</div>
+        <form action="/updatenews" method="post" enctype="multipart/form-data">
+          <input type="hidden" name="num" value="<%- newsData.number %>" />
+          <label for="name">제목</label>
+          <input type="text" name="title" value="<%- newsData.title %>" />
+          <label for="context">내용</label>
+          <input type="text" name="context" value="<%- newsData.context %>" />
+          <label for="thumbfile">썸네일</label>
+          <!-- 이미지 파일 수정 업로드-->
+          <input type="file" name="thumbfile" />
+          <input
+            type="hidden"
+            name="fileOrigin"
+            value="<%- newsData.thumbnail %>"
+          />
+          <button type="submit">게시글 수정</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

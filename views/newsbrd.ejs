@@ -5,6 +5,38 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>게시판 페이지</title>
+    <link href="/css/styles.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dongle:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.3.2/countUp.umd.min.js"
+      integrity="sha512-Be9XaN4NvN8CVmbk4juf7JX2/87a7I37CX1WV37w+jyav4exBHDqHzmjs+Tbx7Dt2j9vpULDZNxcP0sZP03/WQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/hamburgers/1.2.1/hamburgers.min.css"
+      integrity="sha512-+mlclc5Q/eHs49oIOCxnnENudJWuNqX5AogCiqRBgKnpoplPzETg2fkgBFVC6WYUVxYYljuxPNG8RE7yBy1K+g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <style>
       * {
         margin: 0;
@@ -25,10 +57,10 @@
         color: #000;
       }
       .paging li.highlight a {
-        color: red;
+        color: #ff6d0d;
       }
       .table-wrapper {
-        width: 1200px;
+        max-width: 900px;
         margin: 0 auto;
         position: relative;
         display: flex;
@@ -39,11 +71,22 @@
         padding-bottom: 0px;
         margin-bottom: 0px;
       }
+      .table-wrapper .cont-wrapper {
+        height: 70px;
+        width: 100%;
+        overflow: hidden;
+        transition: all 0.3s;
+        cursor: pointer;
+      }
+      .table-wrapper .cont-wrapper.on {
+        margin-bottom: 25px;
+      }
+
       .table-wrapper .info {
         color: #ff6d0d;
         font-size: 24px;
         font-weight: 500;
-        margin-bottom: 25px;
+        margin-bottom: 30px;
         display: flex;
         justify-content: space-between;
       }
@@ -52,22 +95,57 @@
         top: 5px;
       }
       .table-wrapper .context {
+        margin-top: 25px;
         margin-bottom: 25px;
         border-bottom: 1px solid #ff6d0d;
-        padding-bottom: 25px;
-        width: 1200px;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
         line-height: 1.5;
         color: #ff6d0d;
-        opacity: 0;
         transition: all 0.3s;
-        height: 0px;
       }
-      .table-wrapper .context.on {
-        opacity: 1;
-      }
+
       .table-wrapper .context:last-of-type {
         margin-bottom: 0;
         border: none;
+      }
+      .imgcont {
+        width: 90%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        top: 20px;
+      }
+      .imgcont img {
+        max-width: 700px;
+        margin: 0 auto;
+        margin-bottom: 25px;
+      }
+      @media screen and (max-width: 930px) {
+        .table-wrapper .info {
+          color: #ff6d0d;
+          font-size: 20px;
+          font-weight: 500;
+          margin-bottom: 40px;
+          display: flex;
+          justify-content: space-between;
+        }
+      }
+      #newsbrdcont > h2 {
+        text-align: center;
+        color: #ff6d0d;
+        margin: 60px;
+        font-size: 48px;
+        margin-top: 162px;
+      }
+
+      .paging {
+        margin: 60px;
+        display: flex;
+        justify-content: center;
       }
     </style>
     <link
@@ -80,50 +158,95 @@
   </head>
   <body>
     <!--데이터를 보여주는 구간-->
-    <div class="table-wrapper">
-      <% for (let i = 0; i < newsData.length; i++) { %>
-      <div class="cont-wrapper">
-        <h2 class="info">
-          <%- newsData[i].title %><i class="fa-solid fa-arrow-down"></i>
-        </h2>
-        <p class="context"><%- newsData[i].context %></p>
+    <%- include("common/header.ejs") %>
+    <div id="newsbrdcont">
+      <h2>NEWSBOARD</h2>
+      <div class="table-wrapper">
+        <% for (let i = 0; i < newsData.length; i++) { %>
+        <div class="cont-wrapper">
+          <h2 class="info">
+            <%- newsData[i].title %><i class="fa-solid fa-arrow-down"></i>
+          </h2>
+          <div class="contents">
+            <div class="imgcont">
+              <img src="/upload/<%- newsData[i].thumbnail %>" />
+            </div>
+            <p class="context"><%- newsData[i].context %></p>
+          </div>
+        </div>
+        <% } %>
       </div>
-      <% } %>
+      <!--페이징 번호 생성된 구간 처음 이전 1,2,3 다음 마지막-->
+      <ul class="paging">
+        <% if(pageNum <= 1) { %>
+        <li>처음</li>
+        <% } else { %>
+        <!--/boardtest?page=1-->
+        <li><a href="?page=1">처음</a></li>
+        <% } %> <% if(blockStart > totalBlock) { %>
+        <li><a href="?page=<%- blockStart - 1 %>">이전</a></li>
+        <% } %> <% for(let i = blockStart; i <= blockEnd; i++) { %> <% if
+        (pageNum == i) { %>
+        <li class="highlight"><a href="?page=<%- i %>"><%- i %></a></li>
+        <% } else { %>
+        <li><a href="?page=<%- i %>"><%- i %></a></li>
+        <% } %> <% } %> <% if(blockNum < totalBlock) { %>
+        <li><a href="?page=<%- blockEnd + 1 %>">다음</a></li>
+        <% } %> <% if(pageNum >= paging) { %>
+        <li>마지막</li>
+        <% } else { %>
+        <li><a href="?page=<%- paging %>">마지막</a></li>
+        <% } %>
+      </ul>
     </div>
-    <!--페이징 번호 생성된 구간 처음 이전 1,2,3 다음 마지막-->
-    <ul class="paging">
-      <% if(pageNum <= 1) { %>
-      <li>처음</li>
-      <% } else { %>
-      <!--/boardtest?page=1-->
-      <li><a href="?page=1">처음</a></li>
-      <% } %> <% if(blockStart > totalBlock) { %>
-      <li><a href="?page=<%- blockStart - 1 %>">이전</a></li>
-      <% } %> <% for(let i = blockStart; i <= blockEnd; i++) { %> <% if (pageNum
-      == i) { %>
-      <li class="highlight"><a href="?page=<%- i %>"><%- i %></a></li>
-      <% } else { %>
-      <li><a href="?page=<%- i %>"><%- i %></a></li>
-      <% } %> <% } %> <% if(blockNum < totalBlock) { %>
-      <li><a href="?page=<%- blockEnd + 1 %>">다음</a></li>
-      <% } %> <% if(pageNum >= paging) { %>
-      <li>마지막</li>
-      <% } else { %>
-      <li><a href="?page=<%- paging %>">마지막</a></li>
-      <% } %>
-    </ul>
-
+    <%- include("common/footer.ejs") %>
     <script>
-      let title = document.querySelectorAll(".table-wrapper .info");
-      let context = document.querySelectorAll(".table-wrapper .context");
-
-      title.forEach((item, index) => {
+      let hamMenu = document.querySelector(".hamburger");
+      let mobileMenu = document.querySelector("#header .header-mobileMenu");
+      hamMenu.addEventListener("click", () => {
+        hamMenu.classList.toggle("is-active");
+        if (!hamMenu.classList.contains("is-active")) {
+          mobileMenu.style.right = "-320px";
+        } else {
+          mobileMenu.style.right = "0px";
+        }
+      });
+      let clickBtn = document.querySelectorAll(
+        "#header .header-mobileMenu .navMenu .menuList ul .menu"
+      );
+      let depth2 = document.querySelectorAll(
+        "#header .header-mobileMenu .navMenu .menuList ul li .depth2"
+      );
+      clickBtn.forEach((item, index) => {
         item.addEventListener("click", () => {
-          let test = item.nextElementSibling.offsetHeight;
-          if (context[index].classList.toggle("on")) {
-            context[index].style.height = test + "px";
+          depth2.forEach((item, index) => {
+            item.classList.remove("on");
+          });
+          depth2[index].classList.add("on");
+        });
+      });
+    </script>
+    <script>
+      let wrapper = document.querySelectorAll(".table-wrapper .cont-wrapper");
+      let title = document.querySelectorAll(
+        ".table-wrapper .cont-wrapper .info"
+      );
+      let icon = document.querySelectorAll(
+        ".table-wrapper .cont-wrapper .info i"
+      );
+      let contents = document.querySelectorAll(
+        ".table-wrapper .cont-wrapper .contents"
+      );
+      wrapper.forEach((item, index) => {
+        item.addEventListener("click", () => {
+          let wrapperHeight = item.offsetHeight;
+          let contentsHeight = title[index].nextElementSibling.offsetHeight;
+          wrapper[index].classList.toggle("on");
+          icon[index].classList.toggle("fa-arrow-up");
+          if (wrapper[index].classList.contains("on")) {
+            item.style.height = wrapperHeight + contentsHeight + "px";
           } else {
-            context[index].style.height = 0 + "px";
+            item.style.height = 70 + "px";
           }
         });
       });
